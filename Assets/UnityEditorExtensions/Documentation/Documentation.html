@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>UnityEditorExtensions</title>
+</head>
+
+<body>
+    <h1>UnityEditorExtensions</h1>
+    <h2>About</h2>
+    <p>
+        Open sourced package for extending the standard set of capabilities offerred by Unity game engine editor.<br/>
+        Contributions welcome! See <a href="../CONTRIBUTING.md">Contributions</a> for more info.
+    </p>
+
+    <h2>Using the Tag and Layer properties</h2>
+    This package introduces the <b>Tag</b> and <b>Layer</b> properties that you can use on your class's fields as shown below:
+    <pre>
+    public class Demo : MonoBehaviour
+    {
+        [<b>Tag</b>] public string tagAttribute;
+        [<b>Layer</b>] public int layerAttribute;
+    }
+    </pre>
+
+    This instructs the Unity Inspector to display <b>Tag</b> and <b>Layer</b> dropdowns instead of a plain string or integer text boxes for the <code>tagAttribute</code> and <code>layerAttribute<code> fields respectively, as shown below:<br/>
+    <img src='./Tag and Layer Fields.png'/>
+    <br/>
+    <br/>
+
+    See the Demo scene for more.
+
+    <h2>Credits</h2>
+    <p>
+        Credits to <a href="https://answers.unity.com/users/94204/kyle-wg.html">Kyle_WG</a>
+        for his <a href="http://answers.unity.com/answers/1371058/view.html">answer</a> on Unity Answers!
+        The Tag and Layer Attributes are directly derived from his answer. I simply packaged it for easy access.
+    </p>
+</body>
+
+</html>
