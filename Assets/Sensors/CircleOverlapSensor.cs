@@ -4,13 +4,17 @@ using UnityEngine;
 
 public abstract class ProximitySensor : MonoBehaviour
 {
+    public abstract string ID { get; }
     public abstract Collider2D[] Sense();
 }
 
 public class CircleOverlapSensor : ProximitySensor
 {
-    [SerializeField] private float range = 1;
-    [SerializeField] private LayerMask layerMask = 0;
+    public string id;
+    public float range = 1;
+    public LayerMask layerMask = 0;
+
+    public override string ID => id;
 
     public override Collider2D[] Sense()
     {

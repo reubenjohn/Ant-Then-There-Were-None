@@ -1,37 +1,33 @@
 ﻿using System.Linq;
 using UnityEngine;
+using System;
 
-public class Ant : MonoBehaviour
+public class Ant : MonoBehaviour, IProximitySensorAdapter, IAttractable, IJointAdapter
 {
-    [SerializeField] public CircleOverlapSensor Nose { get; private set; }
-    [SerializeField] public CircleOverlapSensor FrontTouch { get; private set; }
+    private ProximitySensor[] proximitySensors;
 
-    public Collider2D[] LatestOdors { get; private set; }
-    public Collider2D[] FrontContacts { get; private set; }
     public ObstacleDetector ObstacleDetector { get; private set; }
+    public Joint2D Gripper { get; private set; }
 
     private Animator animator;
     private Rigidbody2D rb;
-    private RelativeJoint2D mandible;
     private Transform front;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        mandible = GetComponent<RelativeJoint2D>();
+        Gripper = GetComponent<RelativeJoint2D>();
         ObstacleDetector = GetComponent<ObstacleDetector>();
         front = transform.Find("Front");
 
-        Transform sensors = transform.Find("Sensors");
-        Nose = sensors.Find("Nose").GetComponent<CircleOverlapSensor>();
-        FrontTouch = sensors.Find("Front Touch").GetComponent<CircleOverlapSensor>();
+        Transform sensorsTransform = transform.Find("Sensors");
+        proximitySensors = sensorsTransform.GetComponentsInChildren<ProximitySensor>();
     }
 
     void Update()
     {
-        LatestOdors = Nose.Sense();
-        FrontContacts = FrontTouch.Sense();
+        // TODO Move to avoid obtacles behavior
         var detection = ObstacleDetector.Sense()
             .OrderByDescending(obstaclePositionSpeed => obstaclePositionSpeed.incomingSpeed)
             .FirstOrDefault();
@@ -47,15 +43,26 @@ public class Ant : MonoBehaviour
             Debug.DrawLine(front.position, (Vector2)front.position + force, Color.blue);
     }
 
-    public void Grab(Rigidbody2D targetBody)
+    public ProximitySensor[] DiscoverSensors()
     {
-        mandible.enabled = true;
-        mandible.connectedBody = targetBody;
+        return proximitySensors;
     }
 
-    public void Release(Rigidbody2D targetBody)
+    public ProximitySensor GetSensor(string id = null)
     {
-        mandible.enabled = false;
-        mandible.connectedBody = null;
+        return proximitySensors.FirstOrDefault(sensor => sensor.ID == id);
+    }
+
+    public string[] DiscoverJointIds()
+    {
+        return new string[] { "Gripper" };
+    }
+
+    public Joint2D GetJoint2D(string id = null)
+    {
+        if (id == "Gripper")
+            return Gripper;
+        else
+            return null;
     }
 }
