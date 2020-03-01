@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 30242083306770516, guid: 845ff3a0d8791f2408642ffbe6f9034f,
         type: 3}
       propertyPath: m_Name
-      value: Food Marker Variant
+      value: Food Marker
       objectReference: {fileID: 0}
     - target: {fileID: 30242083306770516, guid: 845ff3a0d8791f2408642ffbe6f9034f,
         type: 3}
@@ -75,12 +75,12 @@ PrefabInstance:
     - target: {fileID: 30242083306770518, guid: 845ff3a0d8791f2408642ffbe6f9034f,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.6745098
+      value: 0.8349056
       objectReference: {fileID: 0}
     - target: {fileID: 30242083306770518, guid: 845ff3a0d8791f2408642ffbe6f9034f,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.6784314
+      value: 0.83689475
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 845ff3a0d8791f2408642ffbe6f9034f, type: 3}

@@ -752,7 +752,7 @@ MonoBehaviour:
   targetTag: Food
   targetLayer: 10
   proximityParameterName: Food Proximity
-  strength: 1
+  strength: 2
   showAttractionForce: 1
 --- !u!114 &5762105613675345911
 MonoBehaviour:
@@ -770,7 +770,7 @@ MonoBehaviour:
   targetTag: Queen
   targetLayer: 10
   proximityParameterName: 
-  strength: 0.1
+  strength: 0.5
   showAttractionForce: 1
 --- !u!1101 &5869994940803184853
 AnimatorStateTransition:

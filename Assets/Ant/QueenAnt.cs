@@ -10,7 +10,6 @@ public class QueenAnt : MonoBehaviour, IProximitySensorAdapter, IJointAdapter
     void Start()
     {
         proximitySensors = transform.Find("Sensors").GetComponentsInChildren<ProximitySensor>();
-        GetComponent<Dispenser>().parent = GetComponentInParent<AntEnvironment>().MarkersTransform;
         Gripper = GetComponent<RelativeJoint2D>();
     }
 

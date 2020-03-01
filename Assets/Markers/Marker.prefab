@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 30242083306770518}
   - component: {fileID: 30242083306770520}
   - component: {fileID: 30242083306770519}
+  - component: {fileID: -4852369971628738740}
+  - component: {fileID: -5259053976524406008}
   m_Layer: 11
   m_Name: Marker
   m_TagString: Untagged
@@ -109,7 +111,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
+  m_UseAutoMass: 0
   m_Mass: 0.785398
   m_LinearDrag: 0
   m_AngularDrag: 0.05
@@ -119,3 +121,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4852369971628738740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30242083306770516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0c3e13c9c38fe489d59b70313626a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5259053976524406008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30242083306770516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2397a2796070f8419e79e053eac4e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  density: 100

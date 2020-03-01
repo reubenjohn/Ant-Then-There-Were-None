@@ -23,7 +23,7 @@ public class AttractionBehavior : ProximityBehavior
     override protected void OnSense(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, IEnumerable<Collider2D> colliders)
     {
         colliders.ForEach(collider => 
-            attractable.AddAttraction(collider.attachedRigidbody, strength, showAttractionForce));
+            attractable.AddAttraction(collider, strength, showAttractionForce));
         base.OnSense(animator, stateInfo, layerIndex, colliders);
     }
 }
