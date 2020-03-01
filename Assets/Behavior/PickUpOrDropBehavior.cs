@@ -31,9 +31,13 @@ public class PickUpOrDropBehavior : StateMachineBehaviour
                 {
                     gripper.enabled = true;
                     gripper.connectedBody = collider.attachedRigidbody;
+                    gripper.connectedBody.GetComponents<IConnectable>()
+                        .ForEach(connectable => connectable.OnGripUpdate(gripper.connectedBody));
                 }
                 else
                 {
+                    gripper.connectedBody.GetComponents<IConnectable>()
+                        .ForEach(connectable => connectable.OnGripUpdate(null));
                     gripper.enabled = false;
                     gripper.connectedBody = null;
                 }
