@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class Ant : MonoBehaviour, IProximitySensorAdapter, IJointAdapter
+public class QueenAnt : MonoBehaviour, IProximitySensorAdapter, IJointAdapter
 {
     public Joint2D Gripper { get; private set; }
 
@@ -10,7 +10,7 @@ public class Ant : MonoBehaviour, IProximitySensorAdapter, IJointAdapter
     void Start()
     {
         proximitySensors = transform.Find("Sensors").GetComponentsInChildren<ProximitySensor>();
-        GetComponent<PeriodicDispenser>().parent = GetComponentInParent<AntEnvironment>().MarkersTransform;
+        GetComponent<Dispenser>().parent = GetComponentInParent<AntEnvironment>().MarkersTransform;
         Gripper = GetComponent<RelativeJoint2D>();
     }
 

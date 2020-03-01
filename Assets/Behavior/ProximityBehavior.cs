@@ -1,4 +1,5 @@
-﻿using UnityEditorExtensions;
+﻿using System.Linq;
+using UnityEditorExtensions;
 using UnityEngine;
 
 public class ProximityBehavior : StateMachineBehaviour
@@ -22,18 +23,17 @@ public class ProximityBehavior : StateMachineBehaviour
         {
             if (collider.tag == targetTag && collider.gameObject.layer == targetLayer)
             {
-                if (OnTargetFound(animator, stateInfo, layerIndex, collider))
-                    return;
+                OnTargetFound(animator, stateInfo, layerIndex, collider);
+                return;
             }
         }
         if (!string.IsNullOrEmpty(proximityParameterName))
             animator.SetFloat(proximityParameterName, float.MaxValue);
     }
 
-    protected virtual bool OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
+    protected virtual void OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
     {
         if (!string.IsNullOrEmpty(proximityParameterName))
             animator.SetFloat(proximityParameterName, (collider.transform.position - animator.transform.position).magnitude);
-        return true;
     }
 }

@@ -18,6 +18,7 @@ public class PickUpOrDropBehavior : StateMachineBehaviour
     {
         proximitySensor = animator.GetComponent<IProximitySensorAdapter>().GetSensor(touchProximitySensorId);
         gripper = animator.GetComponent<IJointAdapter>().GetJoint2D(jointId);
+        OnStateUpdate(animator, stateInfo, layerIndex);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
