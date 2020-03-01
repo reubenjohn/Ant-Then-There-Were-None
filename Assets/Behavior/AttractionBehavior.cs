@@ -1,4 +1,5 @@
-﻿using UnityEditorExtensions;
+﻿using System.Collections.Generic;
+using UnityEditorExtensions;
 using UnityEngine;
 
 public class AttractionBehavior : ProximityBehavior
@@ -19,9 +20,10 @@ public class AttractionBehavior : ProximityBehavior
         base.OnStateUpdate(animator, stateInfo, layerIndex);
     }
 
-    override protected void OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
+    override protected void OnSense(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, IEnumerable<Collider2D> colliders)
     {
-        base.OnTargetFound(animator, stateInfo, layerIndex, collider);
-        attractable.AddAttraction(collider.attachedRigidbody, strength, showAttractionForce);
+        colliders.ForEach(collider => 
+            attractable.AddAttraction(collider.attachedRigidbody, strength, showAttractionForce));
+        base.OnSense(animator, stateInfo, layerIndex, colliders);
     }
 }

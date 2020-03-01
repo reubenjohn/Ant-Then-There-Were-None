@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditorExtensions;
 using UnityEngine;
 
@@ -19,21 +21,21 @@ public class ProximityBehavior : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        foreach (var collider in proximitySensor.Sense())
-        {
-            if (collider.tag == targetTag && collider.gameObject.layer == targetLayer)
-            {
-                OnTargetFound(animator, stateInfo, layerIndex, collider);
-                return;
-            }
-        }
-        if (!string.IsNullOrEmpty(proximityParameterName))
-            animator.SetFloat(proximityParameterName, float.MaxValue);
+        OnSense(animator, stateInfo, layerIndex,
+            proximitySensor.Sense()
+                .Where(collider => collider.tag == targetTag && collider.gameObject.layer == targetLayer)
+        );
     }
 
-    protected virtual void OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
+    virtual protected void OnSense(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, IEnumerable<Collider2D> colliders)
     {
         if (!string.IsNullOrEmpty(proximityParameterName))
-            animator.SetFloat(proximityParameterName, (collider.transform.position - animator.transform.position).magnitude);
+            animator.SetFloat(
+                proximityParameterName,
+                colliders
+                    .Select(collider => (collider.transform.position - animator.transform.position).magnitude)
+                    .DefaultIfEmpty(float.MaxValue)
+                    .Min()
+            );
     }
 }
