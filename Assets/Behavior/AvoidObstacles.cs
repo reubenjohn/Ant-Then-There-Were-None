@@ -2,12 +2,11 @@
 using UnityEngine;
 using System.Linq;
 
-public class AvoidObstacles : StateMachineBehaviour
+public class AvoidObstacles : DetectObstaclesBehavior
 {
     public float strength = 1f;
     public bool showForces = false;
 
-    private ObstacleDetector obstacleDetector;
     private AvoidanceStrategy avoidanceMode;
 
     public enum AvoidanceStrategy
@@ -17,19 +16,19 @@ public class AvoidObstacles : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        obstacleDetector = animator.GetComponent<ObstacleDetector>();
-        avoidanceMode = obstacleDetector.Sense().Count() == 1 ? AvoidanceStrategy.LEAST_ROTATION : AvoidanceStrategy.CONTINUE_CURRENT_ROTATION;
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        avoidanceMode = obstacleDetector.Detect().Count() == 1 ? AvoidanceStrategy.LEAST_ROTATION : AvoidanceStrategy.CONTINUE_CURRENT_ROTATION;
     }
 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override public void OnDetection(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, ObstacleDetector.ObstacleDetection detection)
     {
+        base.OnDetection(animator, stateInfo, layerIndex, detection);
         switch (avoidanceMode)
         {
             case AvoidanceStrategy.LEAST_ROTATION:
-                var detections = obstacleDetector.Sense();
-                if (detections.Count() == 1)
+                if (detection != null)
                 {
-                    AvoidWithLeastRotation(animator, detections.First());
+                    AvoidWithLeastRotation(animator, detection);
                 }
                 else
                 {
@@ -42,10 +41,12 @@ public class AvoidObstacles : StateMachineBehaviour
                 break;
         }
     }
+
     public void AvoidWithCurrentRotation()
     {
         obstacleDetector.rb.AddTorque(strength * Mathf.Sign(obstacleDetector.rb.angularVelocity));
     }
+
     public void AvoidWithLeastRotation(Animator animator, ObstacleDetector.ObstacleDetection detection)
     {
         float angleToObstacle = Vector2.SignedAngle(animator.transform.right, detection.relativePosition);

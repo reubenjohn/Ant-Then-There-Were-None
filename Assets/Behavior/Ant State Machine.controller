@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8933414424077184059
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622af02869f31644f99c8eb8aab88507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1101 &-8515424302581186379
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -130,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9120e26389ecff3459a4d4faccd0e631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  incomingObstacleAngleParameter: Incoming Obstacle Angle
   strength: 1
   showForces: 1
 --- !u!1101 &-4757030551794321742
@@ -284,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9120e26389ecff3459a4d4faccd0e631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  incomingObstacleAngleParameter: Incoming Obstacle Angle
   strength: 1
   showForces: 1
 --- !u!1102 &-3031398510339328170
@@ -294,7 +308,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Find Queen
-  m_Speed: 1
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7784501807961356996}
@@ -303,6 +317,7 @@ AnimatorState:
   - {fileID: 8396721121827619084}
   - {fileID: -4913670075518496922}
   - {fileID: -3760621077927791352}
+  - {fileID: 5956689405543700347}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -311,7 +326,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: c944561dc51edce4db30e94b522741e2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -345,6 +360,19 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-1788985878403645181
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0064fce4f536243bba04a9c9da5141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incomingObstacleAngleParameter: Incoming Obstacle Angle
 --- !u!114 &-1380446781563614038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,7 +390,7 @@ MonoBehaviour:
   touchProximitySensorId: Front Touch
   targetLayer: 10
   targetTag: Queen
-  completionParameterName: Holding Food
+  gripParameterName: Holding Food
 --- !u!1101 &-251938019128384207
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -402,25 +430,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Holding Food
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Food Proximity
     m_Type: 1
     m_DefaultFloat: Infinity
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Queen Proximity
     m_Type: 1
     m_DefaultFloat: Infinity
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -451,6 +479,7 @@ AnimatorState:
   - {fileID: -4260481203661599026}
   - {fileID: 1575808678894250644}
   - {fileID: 6663578528382161612}
+  - {fileID: -1788985878403645181}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -459,7 +488,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 1441a5a5e72d67544be207f9b6b00f62, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -595,15 +624,15 @@ AnimatorStateMachine:
     m_Position: {x: 1100, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3012052713141875825}
-    m_Position: {x: 1410, y: 110, z: 0}
+    m_Position: {x: 1370, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: -60, z: 0}
+  m_AnyStatePosition: {x: 50, y: 70, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 1700, y: 110, z: 0}
+  m_ExitPosition: {x: 50, y: 170, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 126837152175027715}
 --- !u!1102 &3012052713141875825
@@ -777,7 +806,7 @@ MonoBehaviour:
   targetTag: Food
   targetLayer: 10
   proximityParameterName: Food Proximity
-  strength: 100
+  strength: 1
   showAttractionForce: 1
 --- !u!114 &5762105613675345911
 MonoBehaviour:
@@ -795,7 +824,7 @@ MonoBehaviour:
   targetTag: Queen
   targetLayer: 10
   proximityParameterName: 
-  strength: 100
+  strength: 0.1
   showAttractionForce: 1
 --- !u!1101 &5869994940803184853
 AnimatorStateTransition:
@@ -847,6 +876,19 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &5956689405543700347
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0064fce4f536243bba04a9c9da5141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  incomingObstacleAngleParameter: Incoming Obstacle Angle
 --- !u!114 &6663578528382161612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -920,4 +962,4 @@ MonoBehaviour:
   touchProximitySensorId: Front Touch
   targetLayer: 10
   targetTag: Food
-  completionParameterName: Holding Food
+  gripParameterName: Holding Food

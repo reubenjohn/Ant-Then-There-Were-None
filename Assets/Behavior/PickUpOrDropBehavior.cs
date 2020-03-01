@@ -9,7 +9,7 @@ public class PickUpOrDropBehavior : StateMachineBehaviour
     public string touchProximitySensorId;
     [Layer] public int targetLayer;
     [Tag] public string targetTag;
-    public string completionParameterName = null;
+    public string gripParameterName = null;
 
     private ProximitySensor proximitySensor;
     private Joint2D gripper;
@@ -39,8 +39,8 @@ public class PickUpOrDropBehavior : StateMachineBehaviour
                 break;
             }
         }
-        if (!string.IsNullOrEmpty(completionParameterName))
-            animator.SetBool(completionParameterName, gripper.enabled);
+        if (!string.IsNullOrEmpty(gripParameterName))
+            animator.SetBool(gripParameterName, gripper.enabled);
     }
 
     public enum Mode

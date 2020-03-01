@@ -19,9 +19,10 @@ public class AttractionBehavior : ProximityBehavior
         base.OnStateUpdate(animator, stateInfo, layerIndex);
     }
 
-    override protected void OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
+    override protected bool OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
     {
         base.OnTargetFound(animator, stateInfo, layerIndex, collider);
         attractable.AddAttraction(collider.attachedRigidbody, strength, showAttractionForce);
+        return false;
     }
 }

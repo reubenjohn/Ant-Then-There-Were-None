@@ -22,17 +22,18 @@ public class ProximityBehavior : StateMachineBehaviour
         {
             if (collider.tag == targetTag && collider.gameObject.layer == targetLayer)
             {
-                OnTargetFound(animator, stateInfo, layerIndex, collider);
-                return;
+                if (OnTargetFound(animator, stateInfo, layerIndex, collider))
+                    return;
             }
         }
         if (!string.IsNullOrEmpty(proximityParameterName))
             animator.SetFloat(proximityParameterName, float.MaxValue);
     }
 
-    protected virtual void OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
+    protected virtual bool OnTargetFound(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider2D collider)
     {
         if (!string.IsNullOrEmpty(proximityParameterName))
             animator.SetFloat(proximityParameterName, (collider.transform.position - animator.transform.position).magnitude);
+        return true;
     }
 }

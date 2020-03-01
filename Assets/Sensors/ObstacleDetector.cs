@@ -8,7 +8,8 @@ public class ObstacleDetector : MonoBehaviour
     public ProximitySensor proximitySensor = null;
     public Transform forcePoint = null;
 
-    public IEnumerable<ObstacleDetection> Sense()
+    //TODO Cache obstacles within frame
+    public IEnumerable<ObstacleDetection> Detect()
     {
         return proximitySensor.Sense()
                .Select(obstacle =>

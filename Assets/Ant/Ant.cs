@@ -2,24 +2,19 @@
 using UnityEngine;
 using System;
 
-public class Ant : MonoBehaviour, IProximitySensorAdapter, IAttractable, IJointAdapter
+public class Ant : MonoBehaviour, IProximitySensorAdapter, IJointAdapter
 {
-    private ProximitySensor[] proximitySensors;
-
-    public ObstacleDetector ObstacleDetector { get; private set; }
     public Joint2D Gripper { get; private set; }
 
+    private ProximitySensor[] proximitySensors;
     private Animator animator;
     private Rigidbody2D rb;
-    private Transform front;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         Gripper = GetComponent<RelativeJoint2D>();
-        ObstacleDetector = GetComponent<ObstacleDetector>();
-        front = transform.Find("Front");
 
         Transform sensorsTransform = transform.Find("Sensors");
         proximitySensors = sensorsTransform.GetComponentsInChildren<ProximitySensor>();
@@ -27,20 +22,6 @@ public class Ant : MonoBehaviour, IProximitySensorAdapter, IAttractable, IJointA
 
     void Update()
     {
-        // TODO Move to avoid obtacles behavior
-        var detection = ObstacleDetector.Sense()
-            .OrderByDescending(obstaclePositionSpeed => obstaclePositionSpeed.incomingSpeed)
-            .FirstOrDefault();
-        animator.SetFloat("Incoming Obstacle Angle", detection != null ? Vector2.Angle(transform.right, detection.relativePosition) : 180);
-    }
-
-    public void AddAttraction(Rigidbody2D attractor, float strength, bool showForce = false)
-    {
-        float magnitude = attractor.mass;
-        Vector2 force = strength * magnitude * (attractor.position - (Vector2)front.position).normalized;
-        rb.AddForceAtPosition(force, front.position);
-        if (showForce)
-            Debug.DrawLine(front.position, (Vector2)front.position + force, Color.blue);
     }
 
     public ProximitySensor[] DiscoverSensors()
